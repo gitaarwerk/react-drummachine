@@ -59,3 +59,11 @@ export function parseRequest(response: Response): Promise<TResponse> {
 
   return Promise.resolve({ res: response.text() });
 }
+
+export function parseAsArrayBuffer(response: Response): Promise<TResponse> {
+  if (!response.ok) {
+    return Promise.resolve({ err: 'Oops, something went wrong!' });
+  }
+
+  return Promise.resolve({ res: response.arrayBuffer() });
+}

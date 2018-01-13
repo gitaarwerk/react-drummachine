@@ -7,7 +7,6 @@ const bpmToTimePulse = (bpm, callback) => {
 
   clearInterval(currentInterval);
   currentInterval = setInterval(function() {
-    console.log('bpm-tick');
     callback();
   }, pulseTime);
 };

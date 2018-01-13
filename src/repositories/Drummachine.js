@@ -1,5 +1,5 @@
-import { get, put, post, del, parseRequest } from '../utils/fetch';
+import { get, put, post, del, parseRequest, parseAsArrayBuffer } from '../utils/fetch';
 
-// export function loadSample(url) {
-//  const sample = get();
-// }
+export function getAsArrayBuffer(url) {
+  return get(url).then(parseAsArrayBuffer);
+}

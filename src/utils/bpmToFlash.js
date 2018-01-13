@@ -1,6 +1,5 @@
 const bpmToFlash = () => {
   setTimeout(function() {
-    console.log('tock');
     return false;
   }, 100);
 };

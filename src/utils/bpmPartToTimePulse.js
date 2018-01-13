@@ -10,7 +10,6 @@ const bpmPartToTimePulse = (bpm, beatPerMeasure, callback) => {
 
   clearInterval(currentInterval);
   currentInterval = setInterval(function() {
-    console.log('bpm-part-tick');
     callback();
   }, pulseTime);
 };

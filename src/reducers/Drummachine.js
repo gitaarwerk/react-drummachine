@@ -10,15 +10,42 @@ const initialState = {
   beatPerMeasure: 4,
   measure: 4,
   currentMeasure: 0,
-  sampleBuffer: []
+  samples: [],
+  audioBuffer: {},
+  pattern: {
+    1: [
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      true,
+      true,
+      false
+    ]
+  }
 };
 
 export default function reduce(state = initialState, action) {
   switch (action.type) {
-    case types.LOAD_SAMPLE:
+    case types.LOAD_SAMPLE_SUCCESS:
       return {
         ...state,
-        sampleBuffer: [...state.sampleBuffer, action.payload]
+        samples: [...state.samples, action.payload],
+        audioBuffer: {
+          ...state.audioBuffer,
+          [action.payload.sample.channel]: Array(state.beatPerMeasure * state.measure).fill(
+            action.payload.audioBuffer
+          )
+        }
       };
     case types.SET_BPM:
       return {
