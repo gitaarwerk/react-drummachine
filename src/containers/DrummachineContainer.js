@@ -6,8 +6,18 @@ import bpmPartToTimePulse from '../utils/bpmPartToTimePulse';
 // import createSample from '../utils/createSample';
 import sampleList from '../samples/sampleList';
 
+let loaded = 0;
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { bpmTick, bpmPartTick, setBpm, loadSample, playPattern, samplesAreLoaded } = dispatchProps;
+  const {
+    resetPattern,
+    bpmTick,
+    bpmPartTick,
+    setBpm,
+    loadSample,
+    playPattern,
+    samplesAreLoaded
+  } = dispatchProps;
   const {
     bpmLightState,
     bpm,
@@ -25,9 +35,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
   const loadAllSamples = async () => {
-    if (samplesLoaded === false) {
+    if (samplesLoaded === false && loaded === 0) {
       await sampleList.map(sample => loadSample({ sample, audioContext }));
       await samplesAreLoaded();
+      loaded = 1;
+      // resetPattern();
     }
   };
 

@@ -1,4 +1,5 @@
 import * as types from '../actionTypes/Drummachine';
+import * as patternUtils from '../utils/pattern';
 
 const initialState = {
   selectedPattern: 0,
@@ -102,6 +103,11 @@ export default function reduce(state = initialState, action) {
       return {
         ...state,
         selectedPattern: action.payload
+      };
+    case types.RESET_PATTERN:
+      return {
+        ...state,
+        pattern: patternUtils.createEmptyPattern()
       };
     default:
       return state;

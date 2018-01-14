@@ -14,5 +14,6 @@ export const loadSampleSuccess = create(types.LOAD_SAMPLE_SUCCESS);
 export const samplesAreLoaded = create(types.SAMPLES_ARE_LOADED);
 
 export const selectSamplePattern = create(types.SELECT_SAMPLE_PATTERN);
+export const resetPattern = create(types.RESET_PATTERN);
 
 export const playPattern = create(types.PLAY_PATTERN);

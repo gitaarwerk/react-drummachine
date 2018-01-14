@@ -1,5 +1,6 @@
 import * as types from '../../actionTypes/Drummachine';
 import reducer from '../Drummachine';
+import * as mocks from '../../__mocks__/Drummachine';
 
 describe('Drummachine', () => {
   test('sets bpm', () => {
@@ -135,6 +136,22 @@ describe('Drummachine', () => {
 
     expect(actual).toEqual({
       selectedPattern: 13
+    });
+  });
+
+  test('select sample pattern', () => {
+    const action = {
+      type: types.RESET_PATTERN
+    };
+
+    const state = {
+      pattern: mocks.patternMock
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      pattern: mocks.resetPatternMock
     });
   });
 });
