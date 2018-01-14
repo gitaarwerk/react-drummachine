@@ -7,7 +7,6 @@ import createSample from '../utils/createSample';
 
 export function* bpmTock() {
   yield delay(300);
-  yield call(() => console.log('tock'));
   yield put(actions.bpmTock());
 }
 

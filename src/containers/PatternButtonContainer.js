@@ -4,14 +4,11 @@ import * as actions from '../actions/Drummachine';
 import PatternButton from '../components/PatternButton';
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { currentBeatPart, samples, samplesLoaded } = stateProps;
+  const { currentBeatPart, samples } = stateProps;
   const { selectSamplePattern, flipPatternSwitch } = dispatchProps;
   const { patternPosition, patternState, isCurrentPattern, currentPattern } = ownProps;
 
   const patternLightState = currentBeatPart === patternPosition ? true : false;
-  const sampleName = samplesLoaded
-    ? samples[patternPosition] ? samples[patternPosition].sample.name : ''
-    : '';
 
   const lightState = () => {
     // 0 = off
@@ -25,8 +22,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 
   return {
-    isCurrentPattern: isCurrentPattern ? 1 : 0,
-    sampleName,
+    isCurrentPattern,
+    sampleName: samples[patternPosition] ? samples[patternPosition].sample.name : '',
     lightState: lightState(),
     onClickSetPattern: () =>
       flipPatternSwitch({ patternId: currentPattern, switchId: patternPosition }),

@@ -3,7 +3,7 @@ import * as patternUtils from '../utils/pattern';
 
 const initialState = {
   selectedPattern: 0,
-  bpm: 120,
+  bpm: 60,
   bpmLightState: false,
   bpmPartLightState: false,
   currentBeat: 0,

@@ -32,12 +32,12 @@ const Drummachine = ({
     </DisplaySection>
     <input type="number" value={bpm} onChange={setBpm} />
     <PatternButtons>
-      {pattern[selectedPattern].map((pattern, index) => {
+      {pattern[selectedPattern].map((patternItem, index) => {
         return (
           <PatternButton
             currentPattern={selectedPattern}
             isCurrentPattern={selectedPattern === index}
-            patternState={pattern}
+            patternState={patternItem}
             key={index}
             patternPosition={index}
           />
@@ -105,7 +105,8 @@ const PatternButton = styled(PatternButtonContainer)`
 `;
 
 const Enclosure = styled.div`
-  width: auto;
+  width: 600px;
+  margin: 0 auto;
   height: auto;
   color: white;
   background: #43413d;

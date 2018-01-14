@@ -53,26 +53,28 @@ const PressButton = styled.div`
   border-radius: 3px;
   background: ${({ lightState }) =>
     lightState === 0
-      ? '#AAAAAA'
+      ? '#383633'
       : lightState === 1
         ? '#FFFFFF'
         : lightState === 2 ? '#d5bd2a' : lightState === 3 ? '#f8e50f' : ''};
 
   box-shadow: ${({ lightState }) =>
-    lightState === 1
-      ? '0px 0px 5px 0px #FFF'
-      : lightState === 2
-        ? '0px 0px 5px 0px #d5bd2a'
-        : lightState === 3 ? '0px 0px 5px 0px #d5bd2a' : ''};
+    lightState === 0
+      ? ''
+      : lightState === 1
+        ? '0px 0px 5px 0px #FFF'
+        : lightState === 2
+          ? '0px 0px 5px 0px #d5bd2a'
+          : lightState === 3 ? '0px 0px 5px 0px #d5bd2a' : ''};
 
-  // box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 
   &:hover {
-    ${'' /* opacity: 1;
-    box-shadow: inset 0px 0px 20px 4px rgba(255, 200, 200, 0.7);
+    opacity: 1;
+    background: #eff3fd;
+    box-shadow: 0px 0px 10px 0px rgba(239, 243, 253, 0.7);
     position: relative;
-    z-index: 2; */};
+    z-index: 2;
   }
 `;
 
