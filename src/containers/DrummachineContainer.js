@@ -17,7 +17,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmToTimePulse(bpm, bpmTick);
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
-  console.log(bpmLightState);
   const loadAllSamples = async () => {
     if (samplesLoaded === 0) {
       await sampleList.map(sample => loadSample({ sample, audioContext }));

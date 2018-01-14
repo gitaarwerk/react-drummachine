@@ -11,7 +11,7 @@ const LED = styled.div`
 `;
 
 LED.propTypes = {
-  lightState: PropTypes.boolean
+  lightState: PropTypes.bool.isRequired
 };
 
 export default LED;
