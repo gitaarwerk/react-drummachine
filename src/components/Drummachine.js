@@ -5,17 +5,15 @@ import BpmIndicatorContainer from '../containers/BpmIndicatorContainer';
 import BpmLightContainer from '../containers/BpmLightContainer';
 import PatternButtonContainer from '../containers/PatternButtonContainer';
 
-const Drummachine = ({ onClickBpmUp, onClickTestSound }) => (
+const Drummachine = ({ pattern, onClickBpmUp, onClickTestSound }) => (
   <Enclosure>
     <BpmLightContainer />
     <BpmIndicatorContainer />
     <p>This is the drum machine placeholder for further development.</p>
     <PatternButtons>
-      <PatternButton patternPosition={0} onClickTestSound={onClickTestSound} />
-      <PatternButton patternPosition={1} />
-      <PatternButton patternPosition={2} />
-      <PatternButton patternPosition={3} />
-      <PatternButton patternPosition={4} />
+      {pattern[1].map((item, index) => {
+        return <PatternButton key={index} patternPosition={index} />;
+      })}
     </PatternButtons>
     <RaiseBpm onClick={onClickBpmUp} />
   </Enclosure>

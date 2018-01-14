@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const LED = styled.div`
   height: 10px;
@@ -8,5 +9,9 @@ const LED = styled.div`
   background: ${({ lightState }) => (lightState === true ? '#FFF000' : '#330000')};
   margin: 10px;
 `;
+
+LED.propTypes = {
+  lightState: PropTypes.boolean
+};
 
 export default LED;

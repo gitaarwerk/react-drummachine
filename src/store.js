@@ -6,8 +6,6 @@ import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-// applyMiddleware(logger);
-export default store;
+export default createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(rootSaga, store.getState);
+sagaMiddleware.run(rootSaga);

@@ -1,5 +1,4 @@
 import * as types from '../actionTypes/Drummachine';
-import bpmToFlash from '../utils/bpmToFlash';
 
 const initialState = {
   bpm: 20,

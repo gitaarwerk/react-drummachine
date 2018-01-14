@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import PatternButton from '../components/PatternButton';
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { bpmLightState, currentBeatPart } = stateProps;
+  const { currentBeatPart } = stateProps;
   const { patternPosition, onClickTestSound } = ownProps;
 
   const lightState = currentBeatPart === patternPosition ? true : false;
@@ -16,9 +16,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-function mapStateToProps({ drummachine: { bpmLightState, currentBeatPart } }) {
+function mapStateToProps({ drummachine: { currentBeatPart } }) {
   return {
-    bpmLightState,
     currentBeatPart
   };
 }

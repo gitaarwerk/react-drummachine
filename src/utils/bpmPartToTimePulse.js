@@ -9,7 +9,8 @@ const bpmPartToTimePulse = (bpm, beatPerMeasure, callback) => {
   const pulseTime = bpmPartToTime(bpm, beatPerMeasure);
 
   clearInterval(currentInterval);
-  currentInterval = setInterval(function() {
+  currentInterval = setInterval(() => {
+    'callback beat';
     callback();
   }, pulseTime);
 };
@@ -17,7 +18,7 @@ const bpmPartToTimePulse = (bpm, beatPerMeasure, callback) => {
 bpmPartToTimePulse.propTypes = {
   bpm: bpm.isRequired,
   beatPerMeasure: bpm.isRequired,
-  callback: PropTypes.func.isRequired
+  callback: PropTypes.func.isRequirezd
 };
 
 export default bpmPartToTimePulse;

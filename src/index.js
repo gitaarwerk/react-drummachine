@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import rootReducer from './rootReducer';
 import DrummachineContainer from './containers/DrummachineContainer';
 import './App.css';
 
