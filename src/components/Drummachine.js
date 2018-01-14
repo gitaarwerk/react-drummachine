@@ -20,6 +20,7 @@ const Drummachine = ({
       {pattern[selectedPattern].map((pattern, index) => {
         return (
           <PatternButton
+            currentPattern={selectedPattern}
             isCurrentPattern={selectedPattern === index}
             patternState={pattern}
             key={index}

@@ -11,7 +11,7 @@ const PatternButton = ({
   isCurrentPattern
 }) => (
   <PButton>
-    <PressButton lightState={lightState} onClick={onClickSetPattern} />
+    <PressButton lightState={lightState} onClick={() => onClickSetPattern(patternPosition)} />
     <PressButtonLabel
       isCurrentPattern={isCurrentPattern}
       onClick={() => onClickSelectSample(patternPosition)}

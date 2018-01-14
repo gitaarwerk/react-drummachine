@@ -154,4 +154,19 @@ describe('Drummachine', () => {
       pattern: mocks.resetPatternMock
     });
   });
+
+  test('flip pattern switch', () => {
+    const action = {
+      type: types.FLIP_PATTERN_SWITCH,
+      payload: { patternId: 2, switchId: 2 }
+    };
+
+    const state = {
+      pattern: mocks.resetPatternMock
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({ pattern: mocks.flipSwitchMock });
+  });
 });

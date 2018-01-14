@@ -14,44 +14,7 @@ const initialState = {
   samples: [],
   audioBuffer: {},
   samplesLoaded: false,
-  pattern: {
-    0: [
-      true,
-      false,
-      false,
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
-      true,
-      true,
-      false
-    ],
-    1: [
-      true,
-      true,
-      true,
-      true,
-      false,
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
-      true,
-      true,
-      false
-    ]
-  }
+  pattern: patternUtils.createEmptyPattern()
 };
 
 export default function reduce(state = initialState, action) {
@@ -108,6 +71,15 @@ export default function reduce(state = initialState, action) {
       return {
         ...state,
         pattern: patternUtils.createEmptyPattern()
+      };
+    case types.FLIP_PATTERN_SWITCH:
+      return {
+        ...state,
+        pattern: patternUtils.flipSwitch(
+          state.pattern,
+          action.payload.patternId,
+          action.payload.switchId
+        )
       };
     default:
       return state;

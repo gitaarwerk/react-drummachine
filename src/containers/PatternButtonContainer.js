@@ -5,8 +5,8 @@ import PatternButton from '../components/PatternButton';
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { currentBeatPart, samples, samplesLoaded } = stateProps;
-  const { selectSamplePattern } = dispatchProps;
-  const { patternPosition, patternState, isCurrentPattern } = ownProps;
+  const { selectSamplePattern, flipPatternSwitch } = dispatchProps;
+  const { patternPosition, patternState, isCurrentPattern, currentPattern } = ownProps;
 
   const patternLightState = currentBeatPart === patternPosition ? true : false;
   const sampleName = samplesLoaded
@@ -28,15 +28,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     isCurrentPattern: isCurrentPattern ? 1 : 0,
     sampleName,
     lightState: lightState(),
-    onClickSetPattern: () => {
-      console.log('pattern set');
-    },
+    onClickSetPattern: () =>
+      flipPatternSwitch({ patternId: currentPattern, switchId: patternPosition }),
     onClickSelectSample: () => selectSamplePattern(patternPosition),
-    patternState,
-    onClick: () => {
-      console.log('onClickTestSound');
-      // onClickTestSound();
-    }
+    patternState
   };
 };
 
