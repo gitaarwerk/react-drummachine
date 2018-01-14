@@ -10,3 +10,11 @@ body {
   background: white;
   font-family: Arial, sans-serif;
 }
+
+@font-face {
+  font-family: 'digital-7_monomono';
+  src: url('./assets/digital-7_mono-webfont.woff2') format('woff2'),
+    url('./assets/digital-7_mono-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

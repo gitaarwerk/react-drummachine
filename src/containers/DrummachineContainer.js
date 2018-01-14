@@ -33,10 +33,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmToTimePulse(bpm, bpmTick);
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
-  const loadAllSamples = async () => {
+  const loadAllSamples = () => {
     if (samplesLoaded === false && loaded === 0) {
-      await sampleList.map(sample => loadSample({ sample, audioContext }));
-      await samplesAreLoaded();
+      sampleList.map(sample => loadSample({ sample, audioContext }));
+      samplesAreLoaded();
       loaded = 1;
       // resetPattern();
     }
@@ -58,7 +58,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     pattern,
     setBpm: event => setBpm(event.target.value),
     onClickTestSound,
-    bpmLightState
+    bpmLightState,
+    selectedSample: sampleList[selectedPattern].name || 'none'
   };
 };
 

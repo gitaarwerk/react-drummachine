@@ -9,10 +9,11 @@ BpmIndicator.propTypes = {
 };
 
 const BpmLed = styled.div`
-  color: red;
-  background: #282828;
+  color: inherit;
+  font-family: 'digital-7_monomono', sans-serif;
   display: inline-block;
   padding: 2px 3px;
+  font-size: 40px;
 `;
 
 export default BpmIndicator;

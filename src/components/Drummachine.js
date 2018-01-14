@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import BpmIndicatorContainer from '../containers/BpmIndicatorContainer';
 import BpmLight from '../components/BpmLight';
 import PatternButtonContainer from '../containers/PatternButtonContainer';
-
+import Display from './Display';
 const Drummachine = ({
   selectedPattern,
+  selectedSample,
   bpm,
   bpmLightState,
   pattern,
@@ -15,8 +16,14 @@ const Drummachine = ({
   setBpm
 }) => (
   <Enclosure>
-    <BpmLight lightState={bpmLightState} />
-    <BpmIndicatorContainer />
+    <Display>
+      <BpmLight lightState={bpmLightState} />
+      <BpmIndicatorContainer />
+      <SelectedSample>
+        <SelectedSampleInfo>selected sample:</SelectedSampleInfo>
+        <SelectedSampleSelected>{selectedSample}</SelectedSampleSelected>
+      </SelectedSample>
+    </Display>
     <input type="number" value={bpm} onChange={setBpm} />
     <p>This is the drum machine placeholder for further development.</p>
     <PatternButtons>
@@ -35,6 +42,21 @@ const Drummachine = ({
   </Enclosure>
 );
 
+const SelectedSampleInfo = styled.small`
+  color: inherit;
+  font-size: 10px;
+  display: block;
+  text-transform: uppercase;
+`;
+
+const SelectedSampleSelected = styled.div`
+  font-size: 18px;
+`;
+
+const SelectedSample = styled.span`
+  color: inherit;
+  display: inline-block;
+`;
 const PatternButtons = styled.div`
   display: flex;
 `;
@@ -51,7 +73,7 @@ const Enclosure = styled.div`
   width: auto;
   height: auto;
   color: white;
-  background: #000;
+  background: #43413d;
   border-radius: 3px;
   border: 1px solid #282828;
   padding: 20px;
