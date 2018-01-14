@@ -66,7 +66,7 @@ export default function reduce(state = initialState, action) {
       return {
         ...state,
         bpmPartLightState: true,
-        currentBeatPart: state.currentBeatPart < 16 ? state.currentBeatPart + 1 : 0
+        currentBeatPart: state.currentBeatPart < 15 ? state.currentBeatPart + 1 : 0
       };
     case types.BPM_PART_TOCK:
       return {

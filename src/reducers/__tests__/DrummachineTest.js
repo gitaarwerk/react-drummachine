@@ -21,8 +21,7 @@ describe('Drummachine', () => {
 
   test('ticks bpm', () => {
     const action = {
-      type: types.BPM_TICK,
-      payload: 120
+      type: types.BPM_TICK
     };
 
     const state = {
@@ -35,6 +34,74 @@ describe('Drummachine', () => {
     expect(actual).toEqual({
       bpmLightState: true,
       currentBeat: 1
+    });
+  });
+
+  test('tocks bpm', () => {
+    const action = {
+      type: types.BPM_TOCK
+    };
+
+    const state = {
+      bpmLightState: true
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      bpmLightState: false
+    });
+  });
+
+  test('ticks bpm part', () => {
+    const action = {
+      type: types.BPM_PART_TICK
+    };
+
+    const state = {
+      bpmPartLightState: false,
+      currentBeatPart: 0
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      bpmPartLightState: true,
+      currentBeatPart: 1
+    });
+  });
+
+  test('ticks bpm part snaps back to zero after hitting its 16th note', () => {
+    const action = {
+      type: types.BPM_PART_TICK
+    };
+
+    const state = {
+      bpmPartLightState: false,
+      currentBeatPart: 16
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      bpmPartLightState: true,
+      currentBeatPart: 0
+    });
+  });
+
+  test('tocks bpm part', () => {
+    const action = {
+      type: types.BPM_PART_TOCK
+    };
+
+    const state = {
+      bpmPartLightState: true
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      bpmPartLightState: false
     });
   });
 });
