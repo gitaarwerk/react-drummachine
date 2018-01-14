@@ -38,7 +38,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       sampleList.map(sample => loadSample({ sample, audioContext }));
       samplesAreLoaded();
       loaded = 1;
-      // resetPattern();
     }
   };
 
