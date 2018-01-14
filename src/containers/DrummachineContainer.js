@@ -29,7 +29,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     selectedPattern
   } = stateProps;
   const { audioContext } = ownProps;
-  const bpmUp = () => setBpm(bpm + 100);
 
   bpmToTimePulse(bpm, bpmTick);
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
@@ -57,7 +56,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     bpm,
     selectedPattern,
     pattern,
-    onClickBpmUp: bpmUp,
+    setBpm: event => setBpm(event.target.value),
     onClickTestSound,
     bpmLightState
   };

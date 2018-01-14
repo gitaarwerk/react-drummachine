@@ -7,14 +7,17 @@ import PatternButtonContainer from '../containers/PatternButtonContainer';
 
 const Drummachine = ({
   selectedPattern,
+  bpm,
   bpmLightState,
   pattern,
   onClickBpmUp,
-  onClickTestSound
+  onClickTestSound,
+  setBpm
 }) => (
   <Enclosure>
     <BpmLight lightState={bpmLightState} />
     <BpmIndicatorContainer />
+    <input type="number" value={bpm} onChange={setBpm} />
     <p>This is the drum machine placeholder for further development.</p>
     <PatternButtons>
       {pattern[selectedPattern].map((pattern, index) => {
@@ -29,7 +32,6 @@ const Drummachine = ({
         );
       })}
     </PatternButtons>
-    <RaiseBpm onClick={onClickBpmUp} />
   </Enclosure>
 );
 
@@ -39,14 +41,6 @@ const PatternButtons = styled.div`
 
 const PatternButton = styled(PatternButtonContainer)`
   border: 1px solid white;
-`;
-
-const RaiseBpm = styled.div`
-  display: block;
-  height: 10px;
-  width: 10px;
-  background: hotpink;
-  cursor: pointer;
 `;
 
 const Enclosure = styled.div`
