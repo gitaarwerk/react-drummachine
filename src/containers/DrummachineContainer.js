@@ -6,11 +6,18 @@ import bpmPartToTimePulse from '../utils/bpmPartToTimePulse';
 // import createSample from '../utils/createSample';
 import sampleList from '../samples/sampleList';
 
-let samplesLoaded = 0;
-
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { bpmTick, bpmPartTick, setBpm, loadSample, playPattern } = dispatchProps;
-  const { bpmLightState, bpm, beatPerMeasure, audioBuffer, pattern, currentBeatPart } = stateProps;
+  const { bpmTick, bpmPartTick, setBpm, loadSample, playPattern, samplesAreLoaded } = dispatchProps;
+  const {
+    bpmLightState,
+    bpm,
+    beatPerMeasure,
+    audioBuffer,
+    pattern,
+    currentBeatPart,
+    samplesLoaded,
+    selectedPattern
+  } = stateProps;
   const { audioContext } = ownProps;
   const bpmUp = () => setBpm(bpm + 100);
 
@@ -18,10 +25,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
   const loadAllSamples = async () => {
-    if (samplesLoaded === 0) {
+    if (samplesLoaded === false) {
       await sampleList.map(sample => loadSample({ sample, audioContext }));
-
-      samplesLoaded = 1;
+      await samplesAreLoaded();
     }
   };
 
@@ -37,9 +43,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     bpm,
+    selectedPattern,
     pattern,
     onClickBpmUp: bpmUp,
-    onClickTestSound
+    onClickTestSound,
+    bpmLightState
   };
 };
 
@@ -51,7 +59,9 @@ function mapStateToProps({
     samples,
     audioBuffer,
     pattern,
-    currentBeatPart
+    currentBeatPart,
+    samplesLoaded,
+    selectedPattern
   }
 }) {
   return {
@@ -61,7 +71,9 @@ function mapStateToProps({
     samples,
     audioBuffer,
     pattern,
-    currentBeatPart
+    currentBeatPart,
+    samplesLoaded,
+    selectedPattern
   };
 }
 

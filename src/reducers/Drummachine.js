@@ -1,6 +1,7 @@
 import * as types from '../actionTypes/Drummachine';
 
 const initialState = {
+  selectedPattern: 0,
   bpm: 20,
   bpmLightState: false,
   bpmPartLightState: false,
@@ -11,13 +12,32 @@ const initialState = {
   currentMeasure: 0,
   samples: [],
   audioBuffer: {},
+  samplesLoaded: false,
   pattern: {
+    0: [
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      true,
+      true,
+      false
+    ],
     1: [
       true,
-      false,
-      false,
-      false,
       true,
+      true,
+      true,
+      false,
       false,
       true,
       false,
@@ -72,6 +92,16 @@ export default function reduce(state = initialState, action) {
       return {
         ...state,
         bpmPartLightState: false
+      };
+    case types.SAMPLES_ARE_LOADED:
+      return {
+        ...state,
+        samplesLoaded: true
+      };
+    case types.SELECT_SAMPLE_PATTERN:
+      return {
+        ...state,
+        selectedPattern: action.payload
       };
     default:
       return state;

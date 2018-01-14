@@ -2,17 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BpmIndicatorContainer from '../containers/BpmIndicatorContainer';
-import BpmLightContainer from '../containers/BpmLightContainer';
+import BpmLight from '../components/BpmLight';
 import PatternButtonContainer from '../containers/PatternButtonContainer';
 
-const Drummachine = ({ pattern, onClickBpmUp, onClickTestSound }) => (
+const Drummachine = ({
+  selectedPattern,
+  bpmLightState,
+  pattern,
+  onClickBpmUp,
+  onClickTestSound
+}) => (
   <Enclosure>
-    <BpmLightContainer />
+    <BpmLight lightState={bpmLightState} />
     <BpmIndicatorContainer />
     <p>This is the drum machine placeholder for further development.</p>
     <PatternButtons>
-      {pattern[1].map((item, index) => {
-        return <PatternButton key={index} patternPosition={index} />;
+      {pattern[selectedPattern].map((pattern, index) => {
+        return (
+          <PatternButton
+            isCurrentPattern={selectedPattern === index}
+            patternState={pattern}
+            key={index}
+            patternPosition={index}
+          />
+        );
       })}
     </PatternButtons>
     <RaiseBpm onClick={onClickBpmUp} />

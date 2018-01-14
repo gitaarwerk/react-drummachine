@@ -104,4 +104,37 @@ describe('Drummachine', () => {
       bpmPartLightState: false
     });
   });
+
+  test('all samples are loaded', () => {
+    const action = {
+      type: types.SAMPLES_ARE_LOADED
+    };
+
+    const state = {
+      samplesLoaded: false
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      samplesLoaded: true
+    });
+  });
+
+  test('select sample pattern', () => {
+    const action = {
+      type: types.SELECT_SAMPLE_PATTERN,
+      payload: 13
+    };
+
+    const state = {
+      selectedPattern: 0
+    };
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual({
+      selectedPattern: 13
+    });
+  });
 });
