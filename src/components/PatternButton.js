@@ -29,24 +29,25 @@ PatternButton.propTypes = {
 
 const PressButtonLabel = styled.div`
   display: block;
-  border-radius: 15px;
-  border: 1px solid red;
-  margin-top: 8px;
+  border-radius: 3px;
+  border: 1px solid ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#d5bd2a' : '#777')};
+  margin-top: 12px;
   text-align: center;
-  font-size: 11px;
+  font-size: 9px;
   padding: 2px;
   cursor: pointer;
-  color: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? 'white' : 'red')};
-  background: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? 'red' : 'transparent')};
+  color: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#000' : '#CCC')};
+  background: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#d5bd2a' : 'transparent')};
 
   &:hover {
-    color: white;
-    background: red;
+    color: #000;
+    background: #f8e50f;
+    border-color: #f8e50f;
   }
 `;
 
 const PressButton = styled.div`
-  height: 80px;
+  height: 50px;
   width: 50px;
   cursor: pointer;
   border-radius: 3px;
@@ -55,30 +56,31 @@ const PressButton = styled.div`
       ? '#AAAAAA'
       : lightState === 1
         ? '#FFFFFF'
-        : lightState === 2 ? '#FF0000' : lightState === 3 ? 'orange' : ''};
+        : lightState === 2 ? '#d5bd2a' : lightState === 3 ? '#f8e50f' : ''};
 
   box-shadow: ${({ lightState }) =>
     lightState === 1
-      ? '0px 0px 10px 0px #FFF'
+      ? '0px 0px 5px 0px #FFF'
       : lightState === 2
-        ? '0px 0px 10px 0px #FF0000'
-        : lightState === 3 ? '0px 0px 10px 0px #FFAA00' : ''};
+        ? '0px 0px 5px 0px #d5bd2a'
+        : lightState === 3 ? '0px 0px 5px 0px #d5bd2a' : ''};
 
-  opacity: 0.95;
+  // box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.7);
 
   &:hover {
-    opacity: 1;
-
+    ${'' /* opacity: 1;
     box-shadow: inset 0px 0px 20px 4px rgba(255, 200, 200, 0.7);
     position: relative;
-    z-index: 2;
+    z-index: 2; */};
   }
 `;
 
 const PButton = styled.div`
   display: block;
-  margin: 1px;
+  margin: 8px;
   position: relative;
+  flex-grow: 1;
 `;
 
 export default PatternButton;

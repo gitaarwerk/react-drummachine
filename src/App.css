@@ -18,3 +18,14 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'mirageregular';
+  src: url('./assets/Magenta_BBT-webfont.eot');
+  src: url('./assets/Magenta_BBT-webfont.eot?#iefix') format('embedded-opentype'),
+    url('./assets/Magenta_BBT-webfont.woff') format('woff'),
+    url('./assets/Magenta_BBT-webfont.ttf') format('truetype'),
+    url('./assets/Magenta_BBT-webfont.svg#mirageregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

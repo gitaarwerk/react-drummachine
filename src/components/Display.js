@@ -15,6 +15,7 @@ const StyledDisplay = styled.div`
   color: #d5bd2a;
   height: 120px;
   width: 250px;
+  padding: 10px;
 `;
 
 const GridOverlay = styled.div`
@@ -39,11 +40,10 @@ const Overlay = styled.div`
   outline: 2px solid rgba(255, 255, 255, 0.05);
   outline-offset: -1px;
   background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0) 1%,
-    rgba(255, 255, 255, 0.08) 55%,
-    rgba(255, 255, 255, 0.4) 60%,
-    rgba(255, 255, 255, 0.02) 75%,
+    150deg,
+    rgba(-0, 0, 0, 0.3) 6%,
+    rgba(255, 255, 255, 0.3) 18%,
+    rgba(255, 255, 255, 0) 31%,
     rgba(255, 255, 255, 0) 100%
   );
   box-shadow: inset 0px 0px 31px 24px rgba(0, 0, 0, 0.6);
