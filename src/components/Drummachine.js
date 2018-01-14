@@ -40,15 +40,20 @@ const PatternButtons = styled.div`
 `;
 
 const PatternButton = styled(PatternButtonContainer)`
-  border: 1px solid white;
+  &:before {
+    display: block;
+    content: ' ';
+    border: 1px solid white;
+  }
 `;
 
 const Enclosure = styled.div`
-  width: 800px;
-  height: 400px;
-  background: #eee;
+  width: auto;
+  height: auto;
+  color: white;
+  background: #000;
+  border-radius: 3px;
   border: 1px solid #282828;
-  margin: 20px;
   padding: 20px;
 `;
 
