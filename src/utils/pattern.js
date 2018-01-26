@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 export const createEmptyPattern = () => {
   const newPattern = {};
   Array(16)
@@ -17,10 +15,4 @@ export const flipSwitch = (patterns, patternId, switchId) => {
       return switchId === index ? !item : item;
     })
   };
-};
-
-flipSwitch.propTypes = {
-  patterns: PropTypes.objectOf(PropTypes.Array).isRequired,
-  patternId: PropTypes.number.isRequired,
-  switchId: PropTypes.number.isRequired
 };

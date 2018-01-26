@@ -26,22 +26,11 @@ export function* loadSample({ payload }) {
   }
 }
 
-export function* playPattern({ payload }) {
-  const { pattern, audioBuffer, currentBeatPart } = payload;
-
-  yield call(() => {
-    // console.log(audioBuffer[1].pop());
-    console.log(payload, currentBeatPart, audioBuffer, pattern[1][currentBeatPart]);
-    if (pattern[1][currentBeatPart] === true && audioBuffer[1]) {
-      console.log('beat!');
-    }
-    //audioBuffer[1].pop().start(0);
-  });
+export function* playSounds({ payload }) {
+  if (payload.length) {
+    const samples = payload.map(item => {
+      console.log(item.sampleUrl);
+    });
+    // const sample = createSample
+  }
 }
-
-/*
-0. cast load samples
-1. load all different samples
-2. create 16x16 sample allocations per measure
-3. play pattern
-*/

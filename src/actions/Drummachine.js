@@ -17,4 +17,4 @@ export const selectSamplePattern = create(types.SELECT_SAMPLE_PATTERN);
 export const resetPattern = create(types.RESET_PATTERN);
 export const flipPatternSwitch = create(types.FLIP_PATTERN_SWITCH);
 
-export const playPattern = create(types.PLAY_PATTERN);
+export const playSounds = create(types.PLAY_SOUNDS);

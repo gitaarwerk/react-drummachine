@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const BpmIndicator = ({ bpm }) => <BpmLed>{bpm}</BpmLed>;
 
 BpmIndicator.propTypes = {
-  bpm: PropTypes.number
+  bpm: PropTypes.any
 };
 
 const BpmLed = styled.div`

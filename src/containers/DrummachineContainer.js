@@ -1,22 +1,46 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/Drummachine';
 import Drummachine from '../components/Drummachine';
 import bpmToTimePulse from '../utils/bpmToTimePulse';
 import bpmPartToTimePulse from '../utils/bpmPartToTimePulse';
-// import createSample from '../utils/createSample';
 import sampleList from '../samples/sampleList';
 
-let loaded = 0;
+class DrummachineContainer extends Component {
+  componentWillMount() {
+    this.props.sampleList.map(sample =>
+      this.props.functions.loadSample({ sample, audioContext: this.props.audioContext })
+    );
+  }
+
+  componentDidMount() {
+    this.props.functions.samplesAreLoaded();
+  }
+
+  render() {
+    return (
+      <Drummachine
+        selectedSample={this.props.selectedSample}
+        bpmLightState={this.props.bpmLightState}
+        onClickTestSound={this.props.onClickTestSound}
+        setBpm={this.props.setBpm}
+        pattern={this.props.pattern}
+        bpm={this.props.bpm}
+        selectedPattern={this.props.selectedPattern}
+      />
+    );
+  }
+}
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
-    resetPattern,
     bpmTick,
     bpmPartTick,
     setBpm,
     loadSample,
     playPattern,
-    samplesAreLoaded
+    samplesAreLoaded,
+    playSounds
   } = dispatchProps;
   const {
     bpmLightState,
@@ -25,7 +49,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     audioBuffer,
     pattern,
     currentBeatPart,
-    samplesLoaded,
     selectedPattern
   } = stateProps;
   const { audioContext } = ownProps;
@@ -33,15 +56,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmToTimePulse(bpm, bpmTick);
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
-  const loadAllSamples = () => {
-    if (samplesLoaded === false && loaded === 0) {
-      sampleList.map(sample => loadSample({ sample, audioContext }));
-      samplesAreLoaded();
-      loaded = 1;
-    }
-  };
+  const soundsToBePlayed = sampleList.filter((sample, index) => {
+    return pattern[index][currentBeatPart];
+  });
 
-  loadAllSamples();
+  playSounds(soundsToBePlayed);
 
   const onClickTestSound = () => {
     playPattern({
@@ -53,12 +72,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     bpm,
+    sampleList,
     selectedPattern,
     pattern,
-    setBpm: event => setBpm(event.target.value),
+    audioContext,
+    setBpm: event => {
+      setBpm(event.target.value);
+    },
     onClickTestSound,
     bpmLightState,
-    selectedSample: sampleList[selectedPattern].name || 'none'
+    selectedSample: sampleList[selectedPattern].name || 'none',
+    functions: { samplesAreLoaded, loadSample }
   };
 };
 
@@ -88,4 +112,4 @@ function mapStateToProps({
   };
 }
 
-export default connect(mapStateToProps, actions, mergeProps)(Drummachine);
+export default connect(mapStateToProps, actions, mergeProps)(DrummachineContainer);
