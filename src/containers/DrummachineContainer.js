@@ -5,16 +5,25 @@ import Drummachine from '../components/Drummachine';
 import bpmToTimePulse from '../utils/bpmToTimePulse';
 import bpmPartToTimePulse from '../utils/bpmPartToTimePulse';
 import sampleList from '../samples/sampleList';
+import BufferLoader from '../utils/bufferLoader';
+
+let bufferList;
+let finishedBufferLoading = false;
 
 class DrummachineContainer extends Component {
   componentWillMount() {
-    this.props.sampleList.map(sample =>
-      this.props.functions.loadSample({ sample, audioContext: this.props.audioContext })
-    );
-  }
+    const finishedLoading = (buffer) => {
+      bufferList = buffer;
+      this.props.samplesAreLoaded();
+      finishedBufferLoading = true;
+    }
+    const sampleArrayToLoad = Array(16).fill('').map((item, index) => { return sampleList[index].sampleUrl});
 
-  componentDidMount() {
-    this.props.functions.samplesAreLoaded();
+   const bufferLoader = new BufferLoader( this.props.audioContext, 
+    sampleArrayToLoad,
+    finishedLoading
+    );
+    bufferLoader.load();
   }
 
   render() {
@@ -22,7 +31,6 @@ class DrummachineContainer extends Component {
       <Drummachine
         selectedSample={this.props.selectedSample}
         bpmLightState={this.props.bpmLightState}
-        onClickTestSound={this.props.onClickTestSound}
         setBpm={this.props.setBpm}
         pattern={this.props.pattern}
         bpm={this.props.bpm}
@@ -37,16 +45,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     bpmTick,
     bpmPartTick,
     setBpm,
-    loadSample,
-    playPattern,
     samplesAreLoaded,
-    playSounds
   } = dispatchProps;
   const {
     bpmLightState,
     bpm,
     beatPerMeasure,
-    audioBuffer,
     pattern,
     currentBeatPart,
     selectedPattern
@@ -56,19 +60,21 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   bpmToTimePulse(bpm, bpmTick);
   bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
 
-  const soundsToBePlayed = sampleList.filter((sample, index) => {
-    return pattern[index][currentBeatPart];
-  });
-
-  playSounds(soundsToBePlayed);
-
-  const onClickTestSound = () => {
-    playPattern({
-      audioBuffer,
-      pattern,
-      currentBeatPart
+  if (finishedBufferLoading === true) {
+    const soundsToBePlayed = sampleList.filter((sample, index) => {
+      return pattern[index][currentBeatPart]
     });
-  };
+
+    soundsToBePlayed.map((item, index) => {
+      const source = audioContext.createBufferSource();
+      source.buffer = bufferList[item.index];
+
+      source.connect(audioContext.destination);
+      source.start(0);
+    });
+  }
+  
+ 
 
   return {
     bpm,
@@ -79,10 +85,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     setBpm: event => {
       setBpm(event.target.value);
     },
-    onClickTestSound,
     bpmLightState,
+    samplesAreLoaded,
     selectedSample: sampleList[selectedPattern].name || 'none',
-    functions: { samplesAreLoaded, loadSample }
   };
 };
 
@@ -104,7 +109,6 @@ function mapStateToProps({
     bpm,
     beatPerMeasure,
     samples,
-    audioBuffer,
     pattern,
     currentBeatPart,
     samplesLoaded,

@@ -17,66 +17,82 @@ import cowbell from './cowbell.wav';
 
 export default [
   {
+    index: 0,
     name: 'Kick 1',
     sampleUrl: kick1
   },
   {
+    index: 1,
     name: 'Kick 2',
     sampleUrl: kick2
   },
   {
+    index: 2,
     name: 'Kick 3',
     sampleUrl: kick3
   },
   {
+    index: 3,
     name: 'HiHay opn',
     sampleUrl: openHiHat
   },
   {
+    index: 4,
     name: 'HiHay cls',
     sampleUrl: closedHiHat
   },
   {
+    index: 5,
     name: 'Cabasa',
     sampleUrl: cabasa
   },
   {
+    index: 6,
     name: 'Crash',
     sampleUrl: crash
   },
   {
+    index: 7,
     name: 'Rimshot',
     sampleUrl: rimshot
   },
   {
+    index: 8,
     name: 'Ride',
     sampleUrl: ride
   },
   {
+    index: 9,
     name: 'Tom1',
     sampleUrl: tom1
   },
   {
+    index: 10,
     name: 'Tom2',
     sampleUrl: tom2
   },
   {
+    index: 11,
     name: 'Tom3',
     sampleUrl: tom3
   },
   {
+    index: 12,
     name: 'Clap',
     sampleUrl: clap
   },
   {
+    index: 13,
     name: 'Cowbell',
     sampleUrl: cowbell
   },
   {
+    index: 14,
     name: 'Snare 1',
     sampleUrl: snare1
   },
   {
+    index: 15,
     name: 'Snare 2',
     sampleUrl: snare2
   }

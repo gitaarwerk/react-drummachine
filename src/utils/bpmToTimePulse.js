@@ -1,15 +1,12 @@
 import { bpm } from '../types/propTypes';
+
 let bpmInterval;
-let i = 0;
-
-const bpmToTime = bpm => 60000 / parseInt(bpm, 10) * 4;
-
+const bpmToTime = bpm => 60000 / parseInt(bpm, 10);
 const bpmToTimePulse = (bpm, callback) => {
   const pulseTime = bpmToTime(bpm);
 
   function go() {
     clearTimeout(bpmInterval);
-    i++;
     callback();
     bpmInterval = setTimeout(go, pulseTime); // callback
   }

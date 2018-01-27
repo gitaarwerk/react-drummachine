@@ -3,7 +3,7 @@ import * as patternUtils from '../utils/pattern';
 
 const initialState = {
   selectedPattern: 0,
-  bpm: 60,
+  bpm: 120,
   bpmLightState: false,
   bpmPartLightState: false,
   currentBeat: 0,
@@ -11,25 +11,11 @@ const initialState = {
   beatPerMeasure: 4,
   measure: 4,
   currentMeasure: 0,
-  samples: [],
-  audioBuffer: {},
-  samplesLoaded: false,
   pattern: patternUtils.createEmptyPattern()
 };
 
 export default function reduce(state = initialState, action) {
   switch (action.type) {
-    case types.LOAD_SAMPLE_SUCCESS:
-      return {
-        ...state,
-        samples: [...state.samples, action.payload],
-        audioBuffer: {
-          ...state.audioBuffer,
-          [action.payload.sample.channel]: Array(state.beatPerMeasure * state.measure).fill(
-            action.payload.audioBuffer
-          )
-        }
-      };
     case types.SET_BPM:
       return {
         ...state,
@@ -57,11 +43,7 @@ export default function reduce(state = initialState, action) {
         ...state,
         bpmPartLightState: false
       };
-    case types.SAMPLES_ARE_LOADED:
-      return {
-        ...state,
-        samplesLoaded: true
-      };
+
     case types.SELECT_SAMPLE_PATTERN:
       return {
         ...state,

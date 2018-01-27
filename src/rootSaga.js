@@ -8,6 +8,4 @@ export default function* rootSaga() {
     return sagas.bpmTock;
   });
   yield takeEvery(types.BPM_PART_TICK, sagas.bpmPartTock);
-  yield takeEvery(types.PLAY_SOUNDS, sagas.playSounds);
-  yield takeEvery(types.LOAD_SAMPLE, sagas.loadSample);
 }

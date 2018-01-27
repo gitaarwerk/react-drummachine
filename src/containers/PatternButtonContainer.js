@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions/Drummachine';
 import PatternButton from '../components/PatternButton';
+import sampleList from '../samples/sampleList';
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { currentBeatPart, samples } = stateProps;
+  const { currentBeatPart } = stateProps;
   const { selectSamplePattern, flipPatternSwitch } = dispatchProps;
   const { patternPosition, patternState, isCurrentPattern, currentPattern } = ownProps;
 
@@ -23,7 +24,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     isCurrentPattern,
-    sampleName: samples[patternPosition] ? samples[patternPosition].sample.name : '',
+    sampleName: sampleList[patternPosition] ? sampleList[patternPosition].name : '',
     lightState: lightState(),
     onClickSetPattern: () =>
       flipPatternSwitch({ patternId: currentPattern, switchId: patternPosition }),
@@ -32,11 +33,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-function mapStateToProps({ drummachine: { currentBeatPart, samples, samplesLoaded } }) {
+function mapStateToProps({ drummachine: { currentBeatPart } }) {
   return {
     currentBeatPart,
-    samples,
-    samplesLoaded
   };
 }
 

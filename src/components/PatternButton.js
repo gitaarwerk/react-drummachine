@@ -83,6 +83,17 @@ const PButton = styled.div`
   margin: 8px;
   position: relative;
   flex-grow: 1;
+
+  &:nth-child(8n+4)::after {
+    content: " ";
+    color: #fff;
+    display: block;
+    position: absolute;
+    right: -7px;
+    top: 10px;
+    height: 28px; 
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
 `;
 
 export default PatternButton;
