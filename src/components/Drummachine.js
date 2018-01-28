@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BpmIndicatorContainer from '../containers/BpmIndicatorContainer';
-import BpmLight from '../components/BpmLight';
+import BpmLightContainer from '../containers/BpmLightContainer';
 import PatternButtonContainer from '../containers/PatternButtonContainer';
 import Display from './Display';
 const Drummachine = ({
   selectedPattern,
   selectedSample,
   bpm,
-  bpmLightState,
   pattern,
   onClickBpmUp,
   onClickTestSound,
@@ -26,7 +25,7 @@ const Drummachine = ({
       </Display>
       <BpmLightHolder>
         <BpmLightHolderInfo>bpm</BpmLightHolderInfo>
-        <BpmLight lightState={bpmLightState} />
+        <BpmLightContainer />
       </BpmLightHolder>
       <Logo>ReactDrum</Logo>
     </DisplaySection>

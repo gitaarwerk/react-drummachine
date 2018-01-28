@@ -30,14 +30,14 @@ PatternButton.propTypes = {
 const PressButtonLabel = styled.div`
   display: block;
   border-radius: 3px;
-  border: 1px solid ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#d5bd2a' : '#777')};
+  border: 1px solid ${({ isCurrentPattern }) => (isCurrentPattern === true ? '#d5bd2a' : '#777')};
   margin-top: 12px;
   text-align: center;
   font-size: 9px;
   padding: 2px;
   cursor: pointer;
-  color: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#000' : '#CCC')};
-  background: ${({ isCurrentPattern }) => (isCurrentPattern === 1 ? '#d5bd2a' : 'transparent')};
+  color: ${({ isCurrentPattern }) => (isCurrentPattern === true ? '#000' : '#CCC')};
+  background: ${({ isCurrentPattern }) => (isCurrentPattern === true ? '#d5bd2a' : 'transparent')};
 
   &:hover {
     color: #000;
@@ -56,7 +56,7 @@ const PressButton = styled.div`
       ? '#383633'
       : lightState === 1
         ? '#FFFFFF'
-        : lightState === 2 ? '#d5bd2a' : lightState === 3 ? '#f8e50f' : ''};
+        : lightState === 2 ? '#d5bd2a' : lightState === 3 ? '#fff59f' : ''};
 
   box-shadow: ${({ lightState }) =>
     lightState === 0

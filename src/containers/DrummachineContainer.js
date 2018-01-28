@@ -14,7 +14,6 @@ class DrummachineContainer extends Component {
   componentWillMount() {
     const finishedLoading = (buffer) => {
       bufferList = buffer;
-      this.props.samplesAreLoaded();
       finishedBufferLoading = true;
     }
     const sampleArrayToLoad = Array(16).fill('').map((item, index) => { return sampleList[index].sampleUrl});
@@ -26,11 +25,18 @@ class DrummachineContainer extends Component {
     bufferLoader.load();
   }
 
+
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.bpm !== nextProps.bpm) {
+    this.props.startTimer();
+    }}
+    
+
   render() {
     return (
       <Drummachine
         selectedSample={this.props.selectedSample}
-        bpmLightState={this.props.bpmLightState}
         setBpm={this.props.setBpm}
         pattern={this.props.pattern}
         bpm={this.props.bpm}
@@ -45,7 +51,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     bpmTick,
     bpmPartTick,
     setBpm,
-    samplesAreLoaded,
   } = dispatchProps;
   const {
     bpmLightState,
@@ -57,10 +62,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   } = stateProps;
   const { audioContext } = ownProps;
 
+  const startTimer = () => {
+    bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
+  }
   bpmToTimePulse(bpm, bpmTick);
-  bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
-
-  if (finishedBufferLoading === true) {
+  
+  function playSound() {
     const soundsToBePlayed = sampleList.filter((sample, index) => {
       return pattern[index][currentBeatPart]
     });
@@ -72,6 +79,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       source.connect(audioContext.destination);
       source.start(0);
     });
+  }
+  
+  if (finishedBufferLoading === true) {
+    playSound.immediate=1;
+    playSound();
   }
   
  
@@ -86,32 +98,28 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       setBpm(event.target.value);
     },
     bpmLightState,
-    samplesAreLoaded,
+    startTimer,
     selectedSample: sampleList[selectedPattern].name || 'none',
   };
 };
 
 function mapStateToProps({
   drummachine: {
-    bpmLightState,
     bpm,
     beatPerMeasure,
     samples,
     audioBuffer,
     pattern,
     currentBeatPart,
-    samplesLoaded,
     selectedPattern
   }
 }) {
   return {
-    bpmLightState,
     bpm,
     beatPerMeasure,
     samples,
     pattern,
     currentBeatPart,
-    samplesLoaded,
     selectedPattern
   };
 }

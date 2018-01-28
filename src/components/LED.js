@@ -8,7 +8,7 @@ const LED = styled.div`
   display: inline-block;
   background: ${({ lightState }) => (lightState === true ? 'rgba(240,189,38,1)' : '#2f2604')};
   margin: 10px;
-  box-shadow: inset 0px -2px 4px 0px rgba(0, 0, 0, 0.3), 0px 0px 7px 0px rgba(240, 166, 38, 1);
+  box-shadow: ${({ lightState }) => (lightState === true ? 'inset 0px -2px 4px 0px rgba(0, 0, 0, 0.3), 0px 0px 7px 0px rgba(240, 166, 38, 1)' : '')};
 `;
 
 LED.propTypes = {

@@ -43,5 +43,6 @@ function BufferLoader(context, urlList, callback) {
     this.loadBuffer(this.urlList[i], i);
   }
   
+ BufferLoader.immediate = 1;
 
   export default BufferLoader;

@@ -5,7 +5,7 @@ import LED from './LED';
 
 const BpmLight = ({ lightState }) => (
   <div>
-    <LED lightState={true} />
+    <LED lightState={lightState} />
   </div>
 );
 
