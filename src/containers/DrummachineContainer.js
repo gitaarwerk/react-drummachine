@@ -12,26 +12,29 @@ let finishedBufferLoading = false;
 
 class DrummachineContainer extends Component {
   componentWillMount() {
-    const finishedLoading = (buffer) => {
+    const finishedLoading = buffer => {
       bufferList = buffer;
       finishedBufferLoading = true;
-    }
-    const sampleArrayToLoad = Array(16).fill('').map((item, index) => { return sampleList[index].sampleUrl});
+    };
+    const sampleArrayToLoad = Array(16)
+      .fill('')
+      .map((item, index) => {
+        return sampleList[index].sampleUrl;
+      });
 
-   const bufferLoader = new BufferLoader( this.props.audioContext, 
-    sampleArrayToLoad,
-    finishedLoading
+    const bufferLoader = new BufferLoader(
+      this.props.audioContext,
+      sampleArrayToLoad,
+      finishedLoading
     );
     bufferLoader.load();
   }
 
-
-
   componentWillReceiveProps(nextProps) {
     if (this.props.bpm !== nextProps.bpm) {
-    this.props.startTimer();
-    }}
-    
+      this.props.startTimer();
+    }
+  }
 
   render() {
     return (
@@ -47,11 +50,7 @@ class DrummachineContainer extends Component {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const {
-    bpmTick,
-    bpmPartTick,
-    setBpm,
-  } = dispatchProps;
+  const { bpmTick, bpmPartTick, setBpm } = dispatchProps;
   const {
     bpmLightState,
     bpm,
@@ -64,12 +63,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   const startTimer = () => {
     bpmPartToTimePulse(bpm, beatPerMeasure, bpmPartTick);
-  }
+  };
   bpmToTimePulse(bpm, bpmTick);
-  
+
   function playSound() {
     const soundsToBePlayed = sampleList.filter((sample, index) => {
-      return pattern[index][currentBeatPart]
+      return pattern[index][currentBeatPart];
     });
 
     soundsToBePlayed.map((item, index) => {
@@ -80,13 +79,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       source.start(0);
     });
   }
-  
+
   if (finishedBufferLoading === true) {
-    playSound.immediate=1;
+    playSound.immediate = 1;
     playSound();
   }
-  
- 
 
   return {
     bpm,
@@ -99,7 +96,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     bpmLightState,
     startTimer,
-    selectedSample: sampleList[selectedPattern].name || 'none',
+    selectedSample: sampleList[selectedPattern].name || 'none'
   };
 };
 
